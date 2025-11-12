@@ -1,0 +1,5 @@
+FROM postgres:17.2
+
+COPY demo-medium-20170815.sql.tar /docker-entrypoint-initdb.d/demo-medium-20170815.sql.tar
+RUN tar xzvf /docker-entrypoint-initdb.d/demo-medium-20170815.sql.tar -C /docker-entrypoint-initdb.d
+RUN rm -rf /docker-entrypoint-initdb.d/demo-medium-20170815.sql.tar

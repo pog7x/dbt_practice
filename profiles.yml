@@ -1,0 +1,12 @@
+dbt_practice:
+  target: dev
+  outputs:
+    dev:
+      host: postgres
+      dbname: demo
+      user: postgres
+      password: dbt_password
+      port: 5432
+      schema: bookings
+      threads: 2
+      type: postgres

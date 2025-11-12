@@ -1,0 +1,112 @@
+version: 2
+
+sources:
+  - name: bookings
+    description: Данные из БД авиаперелетов
+    database: demo
+    schema: bookings
+    tables:
+      - name: aircrafts_data
+        description: Модели самолетов
+        columns:
+          - name: aircraft_code
+            description: Код модели самолета
+          - name: model
+            description: Название модели самолета
+          - name: range
+            description: Максимальная дальность полета в километрах
+      - name: airports_data
+        description: Аэропорты
+        columns:
+          - name: airport_code
+            description: Код аэропорта
+          - name: airport_name
+            description: Название аэропорта
+          - name: city
+            description: Город расположения
+          - name: coordinates
+            description: Координаты аэропорта (долгота и широта)
+          - name: timezone
+            description: Часовой пояс аэропорта
+      - name: boarding_passes
+        description: Посадочные талоны
+        columns:
+          - name: ticket_no
+            description: Номер билета
+          - name: flight_id
+            description: Идентификатор рейса
+          - name: boarding_no
+            description: Номер посадочного талона
+          - name: seat_no
+            description: Номера места
+      - name: bookings
+        description: Бронирование перелетов
+        columns:
+          - name: book_ref
+            description: Номер бронирования
+          - name: book_date
+            description: Дата бронирования
+          - name: total_amount
+            description: Полная сумма бронирования
+        config:
+          freshness:
+            warn_after: { count: 6000000, period: hour }
+            error_after: { count: 500000, period: day }
+            filter: current_timestamp::date - book_date::date > 3
+          loaded_at_field: book_date::timestamp
+      - name: flights
+        description: Рейсы
+        columns:
+          - name: flight_id
+            description: Идентификатор рейса
+          - name: flight_no
+            description: Номер рейса
+          - name: scheduled_departure
+            description: Время вылета по расписанию
+          - name: scheduled_arrival
+            description: Время прилёта по расписанию
+          - name: departure_airport
+            description: Аэропорт вылета
+          - name: arrival_airport
+            description: Аэропорт прилёта
+          - name: status
+            description: Статус рейса
+          - name: aircraft_code
+            description: Код самолета
+          - name: actual_departure
+            description: Фактическое время вылета
+          - name: actual_arrival
+            description: Фактическое время прилёта
+      - name: seats
+        description: Места в самолетах
+        columns:
+          - name: aircraft_code
+            description: Код самолёта
+          - name: seat_no
+            description: Номер места
+          - name: fare_conditions
+            description: Класс обслуживания
+      - name: ticket_flights
+        description: Перелёты
+        columns:
+          - name: ticket_no
+            description: Номер билета
+          - name: flight_id
+            description: Идентификатор рейса
+          - name: fare_conditions
+            description: Класс обслуживания
+          - name: amount
+            description: Стоимость перелета
+      - name: tickets
+        description: Билеты
+        columns:
+          - name: ticket_no
+            description: Номер билета
+          - name: book_ref
+            description: Номер бронирования
+          - name: passenger_id
+            description: Номер документа
+          - name: passenger_name
+            description: Полное имя пассажира
+          - name: contact_data
+            description: Контактные данные
