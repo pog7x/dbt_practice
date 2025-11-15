@@ -16,4 +16,4 @@ select
   actual_departure,
   actual_arrival
 from
-    {{ source('bookings', 'flights') }}
+    {{ source('avia', 'flights') }}

@@ -6,7 +6,7 @@
 
 select
     aircraft_code,
-    model,
-    "range"
+    seat_no,
+    fare_conditions
 from
-    {{ source('bookings', 'aircrafts_data') }}
+    {{ source('avia', 'seats') }}

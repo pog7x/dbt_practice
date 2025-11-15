@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: bookings
+  - name: avia
     description: Данные из БД авиаперелетов
     database: demo
     schema: bookings

@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  postgres:
+  pg:
     build:
       context: .
       dockerfile: Dockerfile.postgres
@@ -21,10 +21,17 @@ services:
   dbt:
     build: .
     depends_on:
-      postgres:
+      pg:
         condition: service_healthy
+    environment:
+      DBT_HOST: pg
+      DBT_PORT: 5432
+      DBT_USER: postgres
+      DBT_PASSWORD: dbt_password
     volumes:
       - ./dbt_practice:/usr/app/dbt_practice
       - ./profiles.yml:/.dbt/profiles.yml
+    ports:
+      - '8080:8080'
     user: 1000:1000
     tty: true

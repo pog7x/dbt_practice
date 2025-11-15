@@ -10,4 +10,4 @@ select
   fare_conditions,
   amount
 from
-    {{ source('bookings', 'ticket_flights') }}
+    {{ source('avia', 'ticket_flights') }}

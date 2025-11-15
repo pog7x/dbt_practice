@@ -9,4 +9,4 @@ select
     book_date,
     total_amount
 from
-    {{ source('bookings', 'bookings') }}
+    {{ source('avia', 'bookings') }}

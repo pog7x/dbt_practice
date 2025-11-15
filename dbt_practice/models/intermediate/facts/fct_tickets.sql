@@ -11,4 +11,4 @@ select
   passenger_name,
   contact_data
 from
-    {{ source('bookings', 'tickets') }}
+    {{ ref('stg_avia__tickets') }}

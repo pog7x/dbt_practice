@@ -11,4 +11,4 @@ select
     coordinates,
     timezone
 from
-    {{ source('bookings', 'airports_data') }}
+    {{ source('avia', 'airports_data') }}

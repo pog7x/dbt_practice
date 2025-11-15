@@ -11,5 +11,5 @@ select
     boarding_no,
     seat_no
 from
-    {{ source('bookings', 'boarding_passes') }}
+    {{ source('avia', 'boarding_passes') }}
     
