@@ -14,5 +14,5 @@ select
 from
     {{ source('avia', 'bookings') }}
 {% if is_incremental() %}
-  where book_date > current_date - interval '7 day'
+  where book_date > current_date - interval '5 minutes'
 {% endif %}
